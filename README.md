@@ -24,29 +24,36 @@ https://huggingface.co/drbaph/Viggle-Animate-ComfyUI
 # USAGE
 Step 1. Shot list
 - Browse and pick target references on the left panel, hit SAVE
+  
   <img width="150" alt="image" src="https://github.com/user-attachments/assets/e1e3c627-f215-428c-86ed-fec2b7403d3d" />
 
 - Scrub Playback Videos and hit ＋ Add Shot to add current timestamp to shot list
+  
 <img width="800" alt="image" src="https://github.com/user-attachments/assets/29e4c1bf-25ea-4a7f-9354-cb9a1cf19b8b" />
 
 - you can edit the shot list on the right panel
+  
 <img width="1082" height="422" alt="image" src="https://github.com/user-attachments/assets/78d705c1-f951-429e-aed0-de01a1d4ddd5" />
 
 
 
 Step 2. Prepare Clips and Inpaint Frames
 - Press Step 2 button on the right panel
+  
 - <img width="150" alt="image" src="https://github.com/user-attachments/assets/ed9d9e06-2d2a-4d81-8d38-020a739c28aa" />
 
 - it will extract screenshot .PNG and small duration .MP4 clip in Roggle_UI/viggle_auto/step34input
+  
 <img width="800"  alt="image" src="https://github.com/user-attachments/assets/70b568af-9049-4838-a565-cc5207199751" />
 
 
 Step 3. Inpaint Frames with Target Faces/Body
 - Prompt Qwen2.1 properly in the right panel, hit SAVE
+  
  <img width="800" alt="image" src="https://github.com/user-attachments/assets/8c64cde1-cd21-4a20-bcbf-7a68c37fd190" />
 
 - Press Step 3 button on the right panel, it starts Comfy Desktop backend without the GUI
+  
 <img width="150"  alt="image" src="https://github.com/user-attachments/assets/d7ca2b42-c184-40f8-96a8-620c66f19f0f" />
 
 - Qwen 2.1 will use each .PNG screenshot and inpaint the target references to the screenshot to create source-target permutation of inpainted .PNG
@@ -56,6 +63,7 @@ Step 3. Inpaint Frames with Target Faces/Body
 
 Step 4.
 - Press Step 4 button on the right panel
+  
 <img width="150" alt="image" src="https://github.com/user-attachments/assets/916fcb39-fd21-4caa-a7d4-d6a2077b8e7f" />
 
 - Viggle will animate the inpainted .PNG from Step 3 with the small duration MP4 clip from Step 2
