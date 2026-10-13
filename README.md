@@ -26,7 +26,7 @@ Step 1. Shot list
 - Browse and pick target references on the left panel, hit SAVE
   <img width="150" alt="image" src="https://github.com/user-attachments/assets/e1e3c627-f215-428c-86ed-fec2b7403d3d" />
 
-- Browse Videos and hit ＋ Add Shot to build shot list
+- Scrub Playback Videos and hit ＋ Add Shot to add current timestamp to shot list
 <img width="800" alt="image" src="https://github.com/user-attachments/assets/29e4c1bf-25ea-4a7f-9354-cb9a1cf19b8b" />
 
 - you can edit the shot list on the right panel
