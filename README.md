@@ -24,10 +24,10 @@ https://huggingface.co/drbaph/Viggle-Animate-ComfyUI
 # USAGE
 Step 1. Shot list
 - Browse and pick target references on the left panel, hit SAVE
-  <img width="366" height="787" alt="image" src="https://github.com/user-attachments/assets/e1e3c627-f215-428c-86ed-fec2b7403d3d" />
+  <img width="150" alt="image" src="https://github.com/user-attachments/assets/e1e3c627-f215-428c-86ed-fec2b7403d3d" />
 
 - Browse Videos and hit ＋ Add Shot to build shot list
-<img width="1163" height="835" alt="image" src="https://github.com/user-attachments/assets/29e4c1bf-25ea-4a7f-9354-cb9a1cf19b8b" />
+<img width="800" alt="image" src="https://github.com/user-attachments/assets/29e4c1bf-25ea-4a7f-9354-cb9a1cf19b8b" />
 
 - you can edit the shot list on the right panel
 <img width="1082" height="422" alt="image" src="https://github.com/user-attachments/assets/78d705c1-f951-429e-aed0-de01a1d4ddd5" />
@@ -36,27 +36,27 @@ Step 1. Shot list
 
 Step 2. Prepare Clips and Inpaint Frames
 - Press Step 2 button on the right panel
-- <img width="262" height="175" alt="image" src="https://github.com/user-attachments/assets/ed9d9e06-2d2a-4d81-8d38-020a739c28aa" />
+- <img width="150" alt="image" src="https://github.com/user-attachments/assets/ed9d9e06-2d2a-4d81-8d38-020a739c28aa" />
 
 - it will extract screenshot .PNG and small duration .MP4 clip in Roggle_UI/viggle_auto/step34input
-<img width="1168" height="667" alt="image" src="https://github.com/user-attachments/assets/70b568af-9049-4838-a565-cc5207199751" />
+<img width="800"  alt="image" src="https://github.com/user-attachments/assets/70b568af-9049-4838-a565-cc5207199751" />
 
 
 Step 3. Inpaint Frames with Target Faces/Body
 - Prompt Qwen2.1 properly in the right panel, hit SAVE
- <img width="1105" height="996" alt="image" src="https://github.com/user-attachments/assets/8c64cde1-cd21-4a20-bcbf-7a68c37fd190" />
+ <img width="800" alt="image" src="https://github.com/user-attachments/assets/8c64cde1-cd21-4a20-bcbf-7a68c37fd190" />
 
 - Press Step 3 button on the right panel, it starts Comfy Desktop backend without the GUI
-<img width="261" height="152" alt="image" src="https://github.com/user-attachments/assets/d7ca2b42-c184-40f8-96a8-620c66f19f0f" />
+<img width="150"  alt="image" src="https://github.com/user-attachments/assets/d7ca2b42-c184-40f8-96a8-620c66f19f0f" />
 
 - Qwen 2.1 will use each .PNG screenshot and inpaint the target references to the screenshot to create source-target permutation of inpainted .PNG
 
-<img width="1165" height="1448" alt="image" src="https://github.com/user-attachments/assets/fe982eef-8a66-4db2-8fe4-131c06475ef8" />
+<img width="800" alt="image" src="https://github.com/user-attachments/assets/fe982eef-8a66-4db2-8fe4-131c06475ef8" />
 
 
 Step 4.
 - Press Step 4 button on the right panel
-<img width="251" height="136" alt="image" src="https://github.com/user-attachments/assets/916fcb39-fd21-4caa-a7d4-d6a2077b8e7f" />
+<img width="150" alt="image" src="https://github.com/user-attachments/assets/916fcb39-fd21-4caa-a7d4-d6a2077b8e7f" />
 
 - Viggle will animate the inpainted .PNG from Step 3 with the small duration MP4 clip from Step 2
 
