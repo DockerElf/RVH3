@@ -1,0 +1,492 @@
+{
+  "2": {
+    "inputs": {
+      "text_cond": "fixed_embed_fwd_anyframe.safetensors"
+    },
+    "class_type": "ViggleTextCondLoader",
+    "_meta": {
+      "title": "Load Text Conditioning (Viggle)"
+    }
+  },
+  "3": {
+    "inputs": {
+      "video": "TEST1_00-00-00.mp4",
+      "force_rate": 24,
+      "custom_width": 0,
+      "custom_height": 0,
+      "frame_load_cap": 0,
+      "skip_first_frames": 0,
+      "select_every_nth": 1,
+      "format": "AnimateDiff"
+    },
+    "class_type": "VHS_LoadVideo",
+    "_meta": {
+      "title": "Load Video (Upload) 🎥🅥🅗🅢"
+    }
+  },
+  "4": {
+    "inputs": {
+      "vae_name": "minimax_h3_video_vae_int8_convrot.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "8": {
+    "inputs": {
+      "scheduler": "bong_tangent",
+      "steps": 8,
+      "denoise": 1,
+      "model": [
+        "69",
+        0
+      ]
+    },
+    "class_type": "BasicScheduler",
+    "_meta": {
+      "title": "BasicScheduler"
+    }
+  },
+  "9": {
+    "inputs": {
+      "sampler_name": "euler"
+    },
+    "class_type": "KSamplerSelect",
+    "_meta": {
+      "title": "KSamplerSelect"
+    }
+  },
+  "10": {
+    "inputs": {
+      "noise_seed": 241934799308867
+    },
+    "class_type": "RandomNoise",
+    "_meta": {
+      "title": "RandomNoise"
+    }
+  },
+  "11": {
+    "inputs": {
+      "model": [
+        "25",
+        0
+      ],
+      "conditioning": [
+        "36",
+        1
+      ]
+    },
+    "class_type": "BasicGuider",
+    "_meta": {
+      "title": "Basic Guider"
+    }
+  },
+  "13": {
+    "inputs": {
+      "unet_name": "minimax_h3_ref2va_viggle_pruned_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "Load Diffusion Model"
+    }
+  },
+  "14": {
+    "inputs": {
+      "shift_video": 3,
+      "shift_audio": 3,
+      "model": [
+        "69",
+        0
+      ]
+    },
+    "class_type": "MiniMaxH3SigmaShift",
+    "_meta": {
+      "title": "ModelSamplingMiniMaxH3"
+    }
+  },
+  "16": {
+    "inputs": {
+      "lora_name": "viggle_animate_dmd_lora.safetensors",
+      "strength_model": 1,
+      "model": [
+        "13",
+        0
+      ]
+    },
+    "class_type": "LoraLoaderModelOnly",
+    "_meta": {
+      "title": "Load LoRA"
+    }
+  },
+  "21": {
+    "inputs": {
+      "frame_rate": 24,
+      "loop_count": 0,
+      "filename_prefix": "video/viggle-h3/00000",
+      "format": "video/h264-mp4",
+      "pix_fmt": "yuv420p",
+      "crf": 14,
+      "save_metadata": false,
+      "trim_to_audio": false,
+      "pingpong": false,
+      "save_output": false,
+      "images": [
+        "55",
+        0
+      ]
+    },
+    "class_type": "VHS_VideoCombine",
+    "_meta": {
+      "title": "Video Combine 🎥🅥🅗🅢"
+    }
+  },
+  "22": {
+    "inputs": {
+      "attention": "comfy kitchen attention",
+      "model": [
+        "16",
+        0
+      ]
+    },
+    "class_type": "ModelAttentionBackend",
+    "_meta": {
+      "title": "Model Attention Backend"
+    }
+  },
+  "25": {
+    "inputs": {
+      "max_resolution": 360,
+      "jpeg_quality": 80,
+      "suppress_default_preview": true,
+      "preview_frames": 124,
+      "preview_fps": 12,
+      "tiny_vae": "taeh3.safetensors",
+      "model": [
+        "14",
+        0
+      ]
+    },
+    "class_type": "ModelPreviewOverrideKJ",
+    "_meta": {
+      "title": "Model Preview Override"
+    }
+  },
+  "26": {
+    "inputs": {
+      "megapixels": 1.2,
+      "divisible_by": 32,
+      "interpolation_mode": "nearest",
+      "image": [
+        "3",
+        0
+      ]
+    },
+    "class_type": "JWImageResizeToMegapixels",
+    "_meta": {
+      "title": "Image Resize to Megapixels"
+    }
+  },
+  "36": {
+    "inputs": {
+      "width": 0,
+      "height": 0,
+      "chunk_frames": 124,
+      "overlap_frames": 22,
+      "continuation": "five_frame_anchor",
+      "cond_video": [
+        "26",
+        0
+      ],
+      "ref_image": [
+        "73",
+        0
+      ],
+      "text_cond": [
+        "2",
+        0
+      ],
+      "vae": [
+        "4",
+        0
+      ]
+    },
+    "class_type": "ViggleAnimateConditioningWindowed",
+    "_meta": {
+      "title": "Viggle-Animate Conditioning (H3, Windowed)"
+    }
+  },
+  "40": {
+    "inputs": {
+      "sigmas_string": "1.0, 0.9473684210526315, 0.8823529411764706, 0.8, 0.6923076923076923, 0.5454545454545454, 0.3333333333333333, 0.0",
+      "interpolate_to_steps": 7
+    },
+    "class_type": "CustomSigmas",
+    "_meta": {
+      "title": "Custom Sigma 7 steps (8 Sigma Points)"
+    }
+  },
+  "44": {
+    "inputs": {
+      "sigmas_string": "1.0, 0.9230769230769231, 0.8181818181818182, 0.6666666666666666, 0.42857142857142855, 0.0",
+      "interpolate_to_steps": 5
+    },
+    "class_type": "CustomSigmas",
+    "_meta": {
+      "title": "Custom Sigma 5 steps (6 Sigma Points)"
+    }
+  },
+  "45": {
+    "inputs": {
+      "sigmas_string": "1.0, 0.8571428571428571, 0.6, 0.0",
+      "interpolate_to_steps": 3
+    },
+    "class_type": "CustomSigmas",
+    "_meta": {
+      "title": "Custom Sigma 3 steps (Upstream “4-Step”)"
+    }
+  },
+  "52": {
+    "inputs": {
+      "run_name": "viggle_01",
+      "resume": true,
+      "cond_set": [
+        "36",
+        0
+      ]
+    },
+    "class_type": "ViggleChunkLoopStart",
+    "_meta": {
+      "title": "Viggle Chunk Loop Start"
+    }
+  },
+  "55": {
+    "inputs": {
+      "samples": [
+        "70",
+        1
+      ],
+      "vae": [
+        "4",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "56": {
+    "inputs": {
+      "loop": [
+        "52",
+        0
+      ],
+      "chunk": [
+        "70",
+        0
+      ],
+      "images": [
+        "55",
+        0
+      ],
+      "after_save": [
+        "21",
+        0
+      ]
+    },
+    "class_type": "ViggleChunkLoopEnd",
+    "_meta": {
+      "title": "Viggle Chunk Loop End"
+    }
+  },
+  "57": {
+    "inputs": {
+      "run_name": "viggle_01",
+      "chunk_number": 0,
+      "chunks": [
+        "56",
+        0
+      ]
+    },
+    "class_type": "ViggleAssembleChunkLatents",
+    "_meta": {
+      "title": "Viggle Assemble Chunk Latents"
+    }
+  },
+  "58": {
+    "inputs": {
+      "samples": [
+        "57",
+        0
+      ],
+      "vae": [
+        "4",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode (final)"
+    }
+  },
+  "59": {
+    "inputs": {
+      "frame_rate": 24,
+      "loop_count": 0,
+      "filename_prefix": [
+        "81",
+        0
+      ],
+      "format": "video/h264-mp4",
+      "pix_fmt": "yuv420p",
+      "crf": 14,
+      "save_metadata": true,
+      "trim_to_audio": false,
+      "pingpong": false,
+      "save_output": true,
+      "images": [
+        "58",
+        0
+      ],
+      "audio": [
+        "3",
+        2
+      ]
+    },
+    "class_type": "VHS_VideoCombine",
+    "_meta": {
+      "title": "Video Combine (final)"
+    }
+  },
+  "69": {
+    "inputs": {
+      "selection": "sol-attn",
+      "selection.tau": 1.3,
+      "start_percent": 0.2,
+      "end_percent": 1,
+      "dense_blocks": "",
+      "min_tokens": 12288,
+      "extra_tokens": 256,
+      "sink_conditioning": "exact_kv_and_rows",
+      "verbose": false,
+      "model": [
+        "22",
+        0
+      ]
+    },
+    "class_type": "BlockSparseAttention",
+    "_meta": {
+      "title": "Model Sparse Attention"
+    }
+  },
+  "70": {
+    "inputs": {
+      "seed": 1028908391436083,
+      "rerender_chunk": 0,
+      "rerender_seed": 0,
+      "state": [
+        "52",
+        1
+      ],
+      "guider": [
+        "11",
+        0
+      ],
+      "sampler": [
+        "9",
+        0
+      ],
+      "sigmas": [
+        "44",
+        0
+      ],
+      "vae": [
+        "4",
+        0
+      ]
+    },
+    "class_type": "ViggleSampleChunk",
+    "_meta": {
+      "title": "Viggle Sample Chunk"
+    }
+  },
+  "72": {
+    "inputs": {
+      "steps": 8,
+      "alpha": 0.5,
+      "beta": 0.7
+    },
+    "class_type": "BetaSamplingScheduler",
+    "_meta": {
+      "title": "BetaSamplingScheduler"
+    }
+  },
+  "73": {
+    "inputs": {
+      "image": "REF.png",
+      "filename_mode": "name_only"
+    },
+    "class_type": "LoadImageWithFilename",
+    "_meta": {
+      "title": "Load Image With Filename"
+    }
+  },
+  
+  "75": {
+  "inputs": {
+    "value": "__VIDEO_FILENAME__"
+  },
+  "class_type": "PrimitiveString",
+  "_meta": {
+    "title": "Video filename supplied by controller"
+  }
+},
+
+  "81": {
+    "inputs": {
+      "delimiter": "/",
+      "clean_whitespace": "true",
+      "text_a": [
+        "82",
+        0
+      ],
+      "text_b": [
+        "83",
+        0
+      ],
+      "text_c": [
+        "73",
+        2
+      ]
+    },
+    "class_type": "Text Concatenate",
+    "_meta": {
+      "title": "Text Concatenate"
+    }
+  },
+  "82": {
+    "inputs": {
+      "value": "viggle_auto/step4output"
+    },
+    "class_type": "PrimitiveString",
+    "_meta": {
+      "title": "Text"
+    }
+  },
+  "83": {
+    "inputs": {
+      "source": [
+        "75",
+        0
+      ],
+      "split_by": ".",
+      "from_right": "false"
+    },
+    "class_type": "JWStringSplit",
+    "_meta": {
+      "title": "String Split"
+    }
+  }
+}

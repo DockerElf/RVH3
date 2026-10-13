@@ -1,0 +1,12 @@
+
+#step3-settings-tab[hidden]{display:none}
+#step3-settings-tab{min-width:0;padding-top:8px}
+#step3-settings-tab .step3-weights{display:flex;gap:32px;flex-wrap:wrap;margin:16px 0}
+#step3-settings-tab .step3-weight input{box-sizing:content-box;width:3ch;min-width:3ch;max-width:3ch;padding:8px 10px;font-family:Consolas,monospace;font-variant-numeric:tabular-nums;text-align:center}
+#step3-settings-tab .step3-prompts{display:flex;flex-direction:column;gap:8px}
+#step3-settings-tab .step3-prompts label{margin-top:8px}
+#step3-settings-tab .step3-prompts textarea{box-sizing:border-box;width:100%;font-size:14px;line-height:1.5;height:calc(6em + 18px);min-height:calc(6em + 18px);padding:8px 10px;resize:vertical}
+#step3-settings-tab .step3-settings-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+#step3-settings-status,#step3-settings-path{overflow-wrap:anywhere;white-space:pre-wrap}
+#step3-settings-status[data-state="dirty"]{color:#e8c477}
+#step3-settings-status[data-state="error"]{color:#ff9292}

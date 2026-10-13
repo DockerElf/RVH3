@@ -1,0 +1,29 @@
+{
+  "gui": {
+    "host": "127.0.0.1",
+    "port": 8765,
+    "open_browser": true
+  },
+  "paths": {
+    "viggle_auto": "viggle_auto",
+    "python_executable": null,
+    "web_directory": "web",
+    "data_directory": "data",
+    "source_video_directory": "media",
+    "shots_csv": "data/shots.csv"
+  },
+  "shot_defaults": {
+    "duration_seconds": 10,
+    "width": 1344,
+    "height": 768
+  },
+  "prepare": {
+    "video_codec": "libx264",
+    "crf": 18,
+    "preset": "medium",
+    "audio_codec": "copy",
+    "audio_bitrate": "192k",
+    "timeout_seconds": 7200,
+    "filename_template": "{target}_{timestamp}"
+  }
+}

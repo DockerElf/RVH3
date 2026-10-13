@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="utf-8"/>
+			<meta content="width=device-width, initial-scale=1" name="viewport"/>
+			<title>Roggle • H3 Shot Desk</title>
+			<link href="style.css" rel="stylesheet"/>
+			<link href="jobs.css" rel="stylesheet"/>
+			<link href="layout.css" rel="stylesheet"/>
+			<link href="source-browse.css" rel="stylesheet"/>
+			<link href="layout-chunk1.css" rel="stylesheet"/>
+			<link href="controls-chunk2.css" rel="stylesheet"/>
+			<link href="step3-settings.css" rel="stylesheet"/>
+		</head>
+		<body>
+			<header>
+				<div class="brand">
+					<span class="logo">RVH3</span>
+					<div>Roggle <strong>H3</strong>
+						<small>VIGGLE H3 UI / Shot Desk</small>
+					</div>
+				</div>
+				<div class="header-right">
+					<span class="pill">● Local interface</span>
+					<span class="pill amber">Local playback · draft shots</span>
+				</div>
+			</header>
+			<main>
+				<aside class="left panel">
+					<div class="section-title">WORKSPACE <span>01</span>
+					</div>
+					<label>Project Path</label>
+					<div class="pathline">
+						<input id="project" readonly="" value=""/>
+						<button id="browseproject">📁</button>
+					</div>
+					<button class="wide" id="openproject">Open Project folder</button>
+					<label>Source video folder</label>
+					<div class="pathline">
+						<input id="sourcefolder" placeholder="Click Browse to choose footage" readonly=""/>
+						<button id="browsesource">📁</button>
+					</div>
+					<label>Shot list</label>
+					<div class="pathline">
+						<input id="shotsfile" readonly="" value=""/>
+						<button id="browseshots">📁</button>
+					</div>
+					<div class="divider"></div>
+					<details class="roggle-collapsible static-collapsible" id="static-references-collapse" >
+						<summary class="collapse-summary">
+							<span class="collapse-heading">TARGET REFERENCES</span>
+							<span id="staticcount">0 ENABLED</span>
+							<span aria-hidden="true" class="collapse-chevron" open="">›</span>
+						</summary>
+						<div class="collapse-content">
+							<button class="wide" id="openstatic">Open static folder in Explorer</button>
+							<p class="hint" id="staticfolderpath"></p>
+							<p class="hint" id="staticstatus">Loading reference images…</p>
+							<button class="wide" id="refreshstatic">↻ Refresh</button>
+							<button class="wide" disabled="" id="savestatic">Save enabled references</button>
+							<p class="hint">Checkbox changes are a draft until saved to viggle_auto/config.json. Files are never deleted.</p>							
+							<div class="static-grid" id="staticgrid"></div>
+						</div>
+					</details>
+				</aside>
+				<section class="middle">
+					<div id="playback-area">
+						<div class="tabs review-tabs panel">
+							<button class="selected" data-review="source">STEP 1 / Source</button>
+							<button data-review="step2">STEP 2 / Extract</button>
+							<button data-review="step3">STEP 3 / Inpaint</button>
+							<button data-review="step4">STEP 4 / Animate</button>
+						</div>
+						<section class="source-stack" id="source-review">
+							<div class="player panel">
+								<div class="player-head">
+									<div>
+										<span class="eyebrow">SOURCE PREVIEW</span>
+										<h2 id="clipname">Select a video to preview</h2>
+									</div>
+									<span class="pill">Original source</span>
+								</div>
+								<div class="screen">
+									<video controls="" id="video" preload="metadata"></video>
+									<div class="empty" id="empty">
+										<span class="play-icon">▷</span>
+										<h3>Your shot starts here</h3>
+										<p>Open a local file to test playback.<br/>Choose a video from your footage folder.</p>
+									</div>
+								</div>
+								<div class="timebar">
+									<span id="time">00:00:00.000</span>
+									<span id="length"> / —</span>
+									<span class="time-note">Whole-second filename preview</span>
+								</div>
+								<div class="transport">
+									<button aria-label="Previous file" id="sourceprev" title="Previous file"></button>
+									<button id="back">−1 sec</button>
+									<button id="play">Play / pause</button>
+									<button id="forward">+1 sec</button>
+									<button aria-label="Next file" id="sourcenext" title="Next file"></button>
+									<button class="primary" id="timestamp">＋ Add Shot</button>
+								</div>
+							</div>
+						</section>
+						<section class="player panel" hidden="" id="result-review">
+							<div class="player-head">
+								<div>
+									<span class="eyebrow" id="reviewstage">STEP 2 / REVIEW</span>
+									<h2 id="reviewfilename">Select a result below</h2>
+								</div>
+								<span class="pill" id="reviewkind">Output</span>
+							</div>
+							<div class="review-screen">
+								<img alt="Selected output image" hidden="" id="reviewimage"/>
+								<video controls="" hidden="" id="reviewvideo" preload="metadata"></video>
+								<div class="hint" id="reviewempty">Select an image or video in the result browser.</div>
+							</div>
+							<div class="timebar" hidden="" id="reviewtimebar">
+								<span id="reviewtime">00:00:00.000</span>
+								<span id="reviewlength"> / —</span>
+							</div>
+							<div class="transport" hidden="" id="reviewtransport">
+								<button aria-label="Previous file" id="reviewprev" title="Previous file"></button>
+								<button id="reviewback">−1 sec</button>
+								<button id="reviewplay">Play / pause</button>
+								<button id="reviewforward">+1 sec</button>
+								<button aria-label="Next file" id="reviewnext" title="Next file"></button>
+							</div>
+							<p class="hint review-path" id="reviewpath"></p>
+						</section>
+					</div>
+					<div aria-label="Resize playback and browse heights" aria-orientation="horizontal" class="vertical-splitter" id="vertical-splitter" role="separator" tabindex="0" title="Drag to resize playback and browse heights. Double-click to reset.">⋯</div>
+					<details class="panel result-browser roggle-collapsible" id="browse-collapse" open="">
+						<summary class="collapse-summary browse-collapse-summary">
+							<span class="collapse-heading">BROWSE</span>
+							<span aria-hidden="true" class="collapse-chevron">›</span>
+						</summary>
+						<div class="tabs browse-tabs">
+							<button class="selected" data-source-browse="" id="source-browse-tab">01 / Source</button>
+							<button data-results="step2">STEP 2 / Extracted</button>
+							<button data-results="step3">STEP 3 / Imagined</button>
+							<button data-results="step4">STEP 4 / Animated</button>
+						</div>
+						<div id="source-library-panel">
+							<div class="section-title">SOURCE VIDEO LIBRARY <span id="librarycount">0 FILES</span>
+							</div>
+							<div class="library-toolbar">
+								<button id="folderup">↑ Up</button>
+								<button id="refreshvideos">↻ Refresh</button>
+							</div>
+							<p class="hint" id="foldername">Footage root</p>
+							<p class="hint" id="sourcebrowsepath"></p>
+							<input class="search" id="search" placeholder="Filter this folder…"/>
+							<p class="hint" id="librarystatus">Choose footage with Browse.</p>
+							<div id="library"></div>
+							<button class="wide" id="open">＋ Open preview file</button>
+							<input accept="video/*,.mp4,.mov,.webm" hidden="" id="filepick" type="file"/>
+						</div>
+						<div hidden="" id="stage-library-panel">
+							<div class="result-toolbar">
+								<button id="resultup">↑ Up</button>
+								<button id="resultrefresh">↻ Refresh</button>
+								<button id="resultopen">📁 Open folder</button>
+							</div>
+							<p class="hint" id="resultfolder"></p>
+							<input id="resultfilter" placeholder="Filter files and subfolders…"/>
+							<p class="hint" id="resultstatus">Loading Step 2 results…</p>
+							<div class="result-grid" id="resultentries"></div>
+						</div>
+					</details>
+					<div class="notice">LOCAL WORKSPACE · Shot lists and enabled references can be saved. Prepare writes MP4/PNG pairs directly to step34input.</div>
+				</section>
+				<aside class="right panel">
+					<div class="panel settings">
+						<div class="build-heading">
+							<small>01 / BUILD SHOT LIST</small>
+							<b>Choose clip timing and output settings</b>
+						</div>
+						<div class="defaults">
+							<div>
+								<label>Target name</label>
+								<input id="target" value="fortnite"/>
+							</div>
+							<div>
+								<label>Duration · seconds</label>
+								<input id="duration" min="0.1" step="0.1" type="number" value="10"/>
+							</div>
+							<div>
+								<label>Screenshot Delta · HH:MM:SS</label>
+								<input id="delta" placeholder="00:00:00" value="00:00:00"/>
+							</div>
+							<div>
+								<label>Clip output size</label>
+								<div class="resolution">
+									<input id="width" type="number" value="1344"/>
+									<span>×</span>
+									<input id="height" type="number" value="768"/>
+								</div>
+							</div>
+						</div>
+						<p class="hint">MP4: resized + black padding · PNG: original resolution · Destination: step34input</p>
+					</div>
+					<div class="panel pipeline">
+						<div class="section-title">PROCESSING PIPELINE <span>STEPS 2–4 READY</span>
+						</div>
+						<div class="stages">
+							<button id="prepare">
+								<small>02 / PREPARE</small>
+								<b>Extract clips + PNGs</b>
+								<span>shots in open status</span>
+							</button>
+							<button id="runstep3">
+								<small>03 / REFERENCES</small>
+								<b>Run Step 3</b>
+								<span>loop all Shots</span>
+							</button>
+							<button id="runstep4">
+								<small>04 / RENDER</small>
+								<b>Run Step 4</b>
+								<span>loop Shots x References</span>
+							</button>
+							<button id="runstep5">
+								<small>03 + 04 / COMBO</small>
+								<b>Run Step 3 + 4</b>
+								<span>Combo Run</span>
+							</button>
+						</div>
+						<p class="hint" id="preparestatus">Prepare creates open rows and repairs missing audio on existing CSV clips. Activity appears below.</p>
+						<details class="processing-log" >
+							<summary>Processing activity</summary>
+							<pre id="preparelog">No processing started yet.</pre>
+						</details>
+					</div>
+					<div class="tabs">
+						<button class="selected" data-tab="shots">Shots CSV</button>
+						<button data-tab="step3-settings">Inpaint</button>
+						<button data-tab="jobs">Jobs</button>
+						<button data-tab="config">Configuration</button>						
+					</div>
+					<section id="shots-tab">
+						<div class="table-toolbar">
+							<span id="rowcount">2 draft rows</span>
+							<div class="shot-actions">
+								<button id="reloadshots">Reload CSV</button>
+								<button id="saveshots">Save CSV</button>
+								<button id="add">＋ Add row</button>
+								<button id="opencsvfolder">Open CSV folder</button>
+							</div>
+						</div>
+						<p class="hint">Row-specific duration, Screenshot Delta and resolution are saved in the CSV. Status completes only after successful preparation.</p>
+						<div class="table-wrap">
+							<table>
+								<thead>
+									<tr>
+										<th>Target</th>
+										<th>Timestamp</th>
+										<th>Duration</th>
+										<th>Screenshot Delta</th>
+										<th>Width</th>
+										<th>Height</th>
+										<th>Status</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody id="rows"></tbody>
+							</table>
+						</div>
+						<div class="row-details">
+							<span class="eyebrow">SELECTED ROW · ORIGINAL PATH</span>
+							<p class="hint" id="shoterror"></p>
+							<textarea id="original" placeholder="Select a row" spellcheck="false"></textarea>
+							<p class="hint">Editable draft path. Browser file selection exposes the filename, not its full Windows path.</p>
+						</div>
+						<div class="csv-footer">
+							<span class="dot"></span>
+							<span id="csvstate">Loading CSV…</span>
+						</div>
+					</section>
+					<section hidden="" id="jobs-tab">
+						<div class="jobs-toolbar">
+							<button id="jobs-refresh">Refresh</button>
+							<button id="jobs-clear-incomplete">Clear incomplete</button>
+							<button id="jobs-clear-all">Clear all</button>
+							<button id="startcomfy">Start Comfy</button>
+						</div>
+						<p aria-live="polite" class="hint" id="backend-status">Backend status not checked.</p>
+						<p class="hint" id="jobs-summary">Loading job state…</p>
+						<p class="hint" id="jobs-message">Clearing records does not cancel jobs or delete media. Backend queue must be idle.</p>
+						<div class="table-wrap jobs-table-wrap">
+							<table class="jobs-table">
+								<thead>
+									<tr>
+										<th>Job</th>
+										<th>State</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody id="jobs-rows"></tbody>
+							</table>
+						</div>
+					</section>
+					<section hidden="" id="step3-settings-tab">
+						<div class="section-title">QWEN 2.1 SETTINGS</div>
+						<p class="hint">Values are saved to the linked viggle_auto/config.json and used on the next Step 3 launch.</p>
+						<p class="hint">Each Static references triggers a separate image</p>
+						<div class="step3-weights">
+							<div class="step3-weight">
+								<label for="s3-head-weight">Head Weight</label>
+								<input autocomplete="off" data-step3-field="head_weight" disabled="" id="s3-head-weight" inputmode="decimal" size="4" type="text"/>
+							</div>
+							<div class="step3-weight">
+								<label for="s3-body-weight">Body Weight</label>
+								<input autocomplete="off" data-step3-field="body_weight" disabled="" id="s3-body-weight" inputmode="decimal" size="4" type="text"/>
+							</div>
+						</div>
+						<div class="step3-prompts">
+							<label for="s3-positive-head">PositiveText Head</label>
+							<textarea data-step3-field="positive_text_head" disabled="" id="s3-positive-head" rows="4" spellcheck="false"></textarea>
+							<label for="s3-positive-body">PositiveText Body</label>
+							<textarea data-step3-field="positive_text_body" disabled="" id="s3-positive-body" rows="4" spellcheck="false"></textarea>
+							<label for="s3-positive-general">PositiveText General</label>
+							<textarea data-step3-field="positive_text_general" disabled="" id="s3-positive-general" rows="4" spellcheck="false"></textarea>
+							<label for="s3-negative">NegativeText</label>
+							<textarea data-step3-field="negative_text" disabled="" id="s3-negative" rows="4" spellcheck="false"></textarea>
+						</div>
+						<div class="step3-settings-actions">
+							<button class="primary" disabled="" id="save-step3-settings">Save Step 3 Settings</button>
+							<button id="reload-step3-settings">Reload settings</button>
+						</div>
+						<p aria-live="polite" class="hint" id="step3-settings-status" role="status">Open this tab to load the six settings.</p>
+						<p class="hint" id="step3-settings-path"></p>
+					</section>
+					<section hidden="" id="config-tab">
+						<p class="hint">Loaded Roggle config. Browse selections save automatically; this editor remains draft-only.</p>
+						<textarea id="configeditor" spellcheck="false"></textarea>
+						<button class="wide" id="validate">Validate draft JSON</button>
+						<p class="hint">Effective linked paths</p>
+						<pre id="linkdetails"></pre>
+					</section>
+				</aside>
+			</main>
+			<footer>
+				<span id="activity">Ready · GUI design sandbox</span>
+				<span>Prepare + Step 3 + Step 4 enabled</span>
+			</footer>
+			<div id="toast" role="status"></div>
+			<script src="app.js"></script>
+			<script src="static.js"></script>
+			<script src="review.js"></script>
+			<script src="jobs.js"></script>
+			<script src="layout.js"></script>
+			<script src="source-browse.js"></script>
+			<script src="controls-chunk2.js"></script>
+			<script src="step3-settings.js"></script>
+		</body>
+	</html>

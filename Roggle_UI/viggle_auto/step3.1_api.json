@@ -1,0 +1,691 @@
+{
+  "13": {
+    "inputs": {
+      "aspect_ratio": "1:1 (Square)",
+      "megapixels": 2,
+      "multiple": 32
+    },
+    "class_type": "ResolutionSelector",
+    "_meta": {
+      "title": "Resolution Selector"
+    }
+  },
+  "461": {
+    "inputs": {
+      "filename_prefix": [
+        "540",
+        0
+      ],
+      "format": "png",
+      "format.bit_depth": "8-bit",
+      "format.input_color_space": "sRGB",
+      "images": [
+        "487",
+        0
+      ]
+    },
+    "class_type": "SaveImageAdvanced",
+    "_meta": {
+      "title": "Save Image (Advanced)"
+    }
+  },
+  "477": {
+    "inputs": {
+      "width": [
+        "13",
+        0
+      ],
+      "height": [
+        "13",
+        1
+      ],
+      "upscale_method": "lanczos",
+      "keep_proportion": "resize",
+      "pad_color": "0, 0, 0",
+      "crop_position": "center",
+      "divisible_by": 32,
+      "device": "cpu",
+      "image": [
+        "534",
+        0
+      ]
+    },
+    "class_type": "ImageResizeKJv2",
+    "_meta": {
+      "title": "Resize Image v2"
+    }
+  },
+  "478": {
+    "inputs": {
+      "width": [
+        "13",
+        0
+      ],
+      "height": [
+        "13",
+        1
+      ],
+      "upscale_method": "lanczos",
+      "keep_proportion": "resize",
+      "pad_color": "0, 0, 0",
+      "crop_position": "center",
+      "divisible_by": 32,
+      "device": "cpu",
+      "image": [
+        "521",
+        0
+      ]
+    },
+    "class_type": "ImageResizeKJv2",
+    "_meta": {
+      "title": "Resize Image v2"
+    }
+  },
+  "484": {
+    "inputs": {
+      "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+      "type": "qwen_image",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {
+      "title": "Load CLIP"
+    }
+  },
+  "485": {
+    "inputs": {
+      "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "486": {
+    "inputs": {
+      "width": [
+        "477",
+        1
+      ],
+      "height": [
+        "477",
+        2
+      ],
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Empty Latent Image"
+    }
+  },
+  "487": {
+    "inputs": {
+      "samples": [
+        "490",
+        0
+      ],
+      "vae": [
+        "485",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "490": {
+    "inputs": {
+      "seed": 42,
+      "steps": 8,
+      "cfg": 1,
+      "sampler_name": "deis",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "495",
+        0
+      ],
+      "positive": [
+        "496",
+        0
+      ],
+      "negative": [
+        "496",
+        1
+      ],
+      "latent_image": [
+        "486",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "491": {
+    "inputs": {
+      "unet_name": "qwen_image_2.1_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "Load Diffusion Model"
+    }
+  },
+  "492": {
+    "inputs": {
+      "lora_name": "p_qwen_image_2.1_8step_v0.1.safetensors",
+      "strength_model": 1,
+      "model": [
+        "491",
+        0
+      ]
+    },
+    "class_type": "LoraLoaderModelOnly",
+    "_meta": {
+      "title": "Load LoRA"
+    }
+  },
+  "493": {
+    "inputs": {
+      "lora_name": "bfs_head_v1.1_qwen_2.1.safetensors",
+      "strength_model": [
+        "544",
+        0
+      ],
+      "model": [
+        "492",
+        0
+      ]
+    },
+    "class_type": "LoraLoaderModelOnly",
+    "_meta": {
+      "title": "Load LoRA"
+    }
+  },
+  "495": {
+    "inputs": {
+      "device": "auto",
+      "dtype": "default",
+      "model": [
+        "543",
+        0
+      ]
+    },
+    "class_type": "QwenImage21Cache",
+    "_meta": {
+      "title": "Qwen Image 2.1 Cache"
+    }
+  },
+  "496": {
+    "inputs": {
+      "prompt": [
+        "584:567",
+        0
+      ],
+      "negative_prompt": [
+        "549",
+        0
+      ],
+      "resolution": 0,
+      "clip": [
+        "484",
+        0
+      ],
+      "images.image_1": [
+        "477",
+        0
+      ],
+      "images.image_2": [
+        "478",
+        0
+      ],
+      "vae": [
+        "485",
+        0
+      ]
+    },
+    "class_type": "TextEncodeQwenImage21",
+    "_meta": {
+      "title": "Text Encode Qwen Image 2.1"
+    }
+  },
+  "521": {
+    "inputs": {
+      "Select images": null,
+      "selected_paths": "[\"RDJ.jpg\"]",
+      "fail_if_empty": true,
+      "filename_handling": "full filename"
+    },
+    "class_type": "vsLinx_LoadSelectedImagesList",
+    "_meta": {
+      "title": "Load (Multiple) Images (List)"
+    }
+  },
+  "534": {
+    "inputs": {
+      "image": "TEST1_00-00-00.png",
+      "filename_mode": "name_only"
+    },
+    "class_type": "LoadImageWithFilename",
+    "_meta": {
+      "title": "Load Image With Filename"
+    }
+  },
+  "535": {
+    "inputs": {
+      "source": [
+        "534",
+        2
+      ],
+      "split_by": "_",
+      "from_right": "false"
+    },
+    "class_type": "JWStringSplit",
+    "_meta": {
+      "title": "String Split"
+    }
+  },
+  "537": {
+    "inputs": {
+      "delimiter": "_",
+      "clean_whitespace": "true",
+      "text_a": [
+        "535",
+        0
+      ],
+      "text_b": [
+        "521",
+        1
+      ],
+      "text_c": [
+        "535",
+        1
+      ]
+    },
+    "class_type": "Text Concatenate",
+    "_meta": {
+      "title": "Text Concatenate"
+    }
+  },
+  "540": {
+    "inputs": {
+      "delimiter": "/",
+      "clean_whitespace": "true",
+      "text_a": [
+        "541",
+        0
+      ],
+      "text_b": [
+        "534",
+        2
+      ],
+      "text_c": [
+        "537",
+        0
+      ]
+    },
+    "class_type": "Text Concatenate",
+    "_meta": {
+      "title": "Text Concatenate"
+    }
+  },
+  "541": {
+    "inputs": {
+      "value": "viggle_auto/step3output"
+    },
+    "class_type": "PrimitiveString",
+    "_meta": {
+      "title": "Text"
+    }
+  },
+  "543": {
+    "inputs": {
+      "lora_name": "bfs_body_swap_v1.0_qwen_2.1.safetensors",
+      "strength_model": [
+        "545",
+        0
+      ],
+      "model": [
+        "493",
+        0
+      ]
+    },
+    "class_type": "LoraLoaderModelOnly",
+    "_meta": {
+      "title": "Load LoRA"
+    }
+  },
+  "544": {
+    "inputs": {
+      "value": 1.0
+    },
+    "class_type": "PrimitiveFloat",
+    "_meta": {
+      "title": "Head Weight"
+    }
+  },
+  "545": {
+    "inputs": {
+      "value": 1.0
+    },
+    "class_type": "PrimitiveFloat",
+    "_meta": {
+      "title": "Body Weight"
+    }
+  },
+  "548": {
+    "inputs": {
+      "value": "start with <image1> as the base image, keeping its lighting, environment, and background. remove the head from <image1> completely and replace it with the head from <image2>, strictly preserving the hair, eye color, nose structure from <image2>. copy the direction of the eye, head rotation, micro expressions from <image1>\n"
+    },
+    "class_type": "PrimitiveStringMultiline",
+    "_meta": {
+      "title": "PositiveText Head"
+    }
+  },
+  "549": {
+    "inputs": {
+      "value": ""
+    },
+    "class_type": "PrimitiveStringMultiline",
+    "_meta": {
+      "title": "NegativeText"
+    }
+  },
+  "550": {
+    "inputs": {
+      "value": "start with <image1> as the base image, keeping its lighting, environment, and background. replace the body from <image1> with the body from <image2>, strictly preserving, body shape and proportions from <image2>. copy the pose, direction of the eye, head rotation, micro expressions from <image1>\n"
+    },
+    "class_type": "PrimitiveStringMultiline",
+    "_meta": {
+      "title": "PositiveText Body"
+    }
+  },
+  "552": {
+    "inputs": {
+      "value": "\nthis section is (weight: 0.9)high quality, sharp details, 4k."
+    },
+    "class_type": "PrimitiveStringMultiline",
+    "_meta": {
+      "title": "PositiveText General"
+    }
+  },
+  "553": {
+    "inputs": {
+      "value": "head_swap: start with <image1> as the base image, keeping its lighting, environment, and background. remove the head from <image1> completely and replace it with the head from <image2>, strictly preserving the hair, eye color, nose structure from <image2>. copy the direction of the eye, head rotation, micro expressions from <image1>, high quality, sharp details, 4k"
+    },
+    "class_type": "PrimitiveStringMultiline",
+    "_meta": {
+      "title": "Old PositiveText"
+    }
+  },
+  "574": {
+    "inputs": {
+      "value": "body_swap: this part is (weight:"
+    },
+    "class_type": "PrimitiveStringMultiline",
+    "_meta": {
+      "title": "Text (Multiline)"
+    }
+  },
+  "576": {
+    "inputs": {
+      "value": "head_swap: this part is (weight:"
+    },
+    "class_type": "PrimitiveStringMultiline",
+    "_meta": {
+      "title": "Text (Multiline)"
+    }
+  },
+  "580": {
+    "inputs": {
+      "source": [
+        "584:567",
+        0
+      ]
+    },
+    "class_type": "PreviewAny",
+    "_meta": {
+      "title": "Preview as Text"
+    }
+  },
+  "581": {
+    "inputs": {
+      "string_a": ") ",
+      "string_b": [
+        "550",
+        0
+      ],
+      "delimiter": " "
+    },
+    "class_type": "StringConcatenate",
+    "_meta": {
+      "title": "Concatenate Text"
+    }
+  },
+  "582": {
+    "inputs": {
+      "string_a": ") ",
+      "string_b": [
+        "548",
+        0
+      ],
+      "delimiter": " "
+    },
+    "class_type": "StringConcatenate",
+    "_meta": {
+      "title": "Concatenate Text"
+    }
+  },
+  "584:579": {
+    "inputs": {
+      "float_": [
+        "545",
+        0
+      ]
+    },
+    "class_type": "Float to String [RvTools]",
+    "_meta": {
+      "title": "Float to String"
+    }
+  },
+  "584:572": {
+    "inputs": {
+      "delimiter": " ",
+      "clean_whitespace": "false",
+      "text_a": [
+        "574",
+        0
+      ],
+      "text_b": [
+        "584:579",
+        0
+      ],
+      "text_c": [
+        "581",
+        0
+      ]
+    },
+    "class_type": "Text Concatenate",
+    "_meta": {
+      "title": "Text Concatenate"
+    }
+  },
+  "584:578": {
+    "inputs": {
+      "float_": [
+        "544",
+        0
+      ]
+    },
+    "class_type": "Float to String [RvTools]",
+    "_meta": {
+      "title": "Float to String"
+    }
+  },
+  "584:575": {
+    "inputs": {
+      "delimiter": " ",
+      "clean_whitespace": "false",
+      "text_a": [
+        "576",
+        0
+      ],
+      "text_b": [
+        "584:578",
+        0
+      ],
+      "text_c": [
+        "582",
+        0
+      ]
+    },
+    "class_type": "Text Concatenate",
+    "_meta": {
+      "title": "Text Concatenate"
+    }
+  },
+  "584:559": {
+    "inputs": {
+      "boolean": [
+        "584:564",
+        0
+      ],
+      "on_true": [
+        "584:572",
+        0
+      ],
+      "on_false": [
+        "584:566",
+        0
+      ]
+    },
+    "class_type": "easy ifElse",
+    "_meta": {
+      "title": "If else"
+    }
+  },
+  "584:560": {
+    "inputs": {
+      "boolean": [
+        "584:565",
+        0
+      ],
+      "on_true": [
+        "584:575",
+        0
+      ],
+      "on_false": [
+        "584:566",
+        0
+      ]
+    },
+    "class_type": "easy ifElse",
+    "_meta": {
+      "title": "If else"
+    }
+  },
+  "584:565": {
+    "inputs": {
+      "comparison": "a < b",
+      "a": [
+        "584:563",
+        0
+      ],
+      "b": [
+        "544",
+        0
+      ]
+    },
+    "class_type": "easy compare",
+    "_meta": {
+      "title": "Compare"
+    }
+  },
+  "584:566": {
+    "inputs": {
+      "value": ""
+    },
+    "class_type": "easy string",
+    "_meta": {
+      "title": "String"
+    }
+  },
+  "584:564": {
+    "inputs": {
+      "comparison": "a < b",
+      "a": [
+        "584:563",
+        0
+      ],
+      "b": [
+        "545",
+        0
+      ]
+    },
+    "class_type": "easy compare",
+    "_meta": {
+      "title": "Compare"
+    }
+  },
+  "584:563": {
+    "inputs": {
+      "value": 0
+    },
+    "class_type": "PrimitiveFloat",
+    "_meta": {
+      "title": "Float"
+    }
+  },
+  "584:568": {
+    "inputs": {
+      "delimiter": ",",
+      "clean_whitespace": "false",
+      "text_a": [
+        "584:559",
+        0
+      ],
+      "text_b": [
+        "584:560",
+        0
+      ]
+    },
+    "class_type": "Text Concatenate",
+    "_meta": {
+      "title": "Text Concatenate"
+    }
+  },
+  "584:551": {
+    "inputs": {
+      "delimiter": ". ",
+      "clean_whitespace": "false",
+      "text_a": [
+        "584:568",
+        0
+      ],
+      "text_b": [
+        "552",
+        0
+      ]
+    },
+    "class_type": "Text Concatenate",
+    "_meta": {
+      "title": "Text Concatenate"
+    }
+  },
+  "584:567": {
+    "inputs": {
+      "string": [
+        "584:551",
+        0
+      ],
+      "mode": "Both"
+    },
+    "class_type": "StringTrim",
+    "_meta": {
+      "title": "Trim Text"
+    }
+  }
+}
